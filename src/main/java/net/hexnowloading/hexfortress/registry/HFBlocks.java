@@ -6,8 +6,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -51,20 +52,20 @@ public class HFBlocks {
 
     /* Block that uses mod class */
     public static final RegistryObject<Block> BLAZE_CLUSTER = registerBlock("blaze_cluster", () -> new BlazeClusterBlock(BlockBehaviour.Properties.copy(END_ROD).strength(6f).requiresCorrectToolForDrops().noOcclusion().lightLevel((lightlevel) -> {return 5;}).sound(SoundType.AMETHYST_CLUSTER)), true);
-    public static final RegistryObject<Block> FORTRESS_POT = registerBlock("fortress_pot", () -> new PotBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.3f, 0.3f).noOcclusion().sound(SoundType.GLASS)), true);
-    public static final RegistryObject<Block> POT_OF_GREED = registerBlock("pot_of_greed", () -> new PotOfGreedBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(0.3f, 0.3f).noOcclusion().sound(SoundType.GLASS)), true);
-    public static final RegistryObject<Block> GOLD_INGOT_PILE = registerBlock("gold_ingot_pile", () -> new PileBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(3.0f, 6.0f).noOcclusion().sound(SoundType.METAL)), true);
-    public static final RegistryObject<Block> WITHER_VINE = registerBlock("wither_vine", () -> new WitherVineBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).strength(0.2f).noOcclusion().sound(SoundType.VINE)), true);
-    public static final RegistryObject<Block> WITHER_LEAVES = registerBlock("wither_leaves", () -> new WitherLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).noOcclusion().sound(SoundType.GRASS)), true);
-    public static final RegistryObject<Block> NETHER_BRICK_PILE = registerBlock("nether_brick_pile", () -> new PileBlock(BlockBehaviour.Properties.of(Material.DECORATION).strength(3.0f, 6.0f).noOcclusion().sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops()), true);
-    public static final RegistryObject<Block> FORTRESS_EXPLOSIVE_BARREL = registerBlock("fortress_explosive_barrel", () -> new ExplosiveBarrelBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE).instabreak().noOcclusion().sound(SoundType.GRASS)), true);
-    public static final RegistryObject<Block> FORTRESS_BOOK_PILE = registerBlock("fortress_book_pile", () -> new BookPileBlock(BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion().sound(SoundType.WOOL)), true);
+    public static final RegistryObject<Block> FORTRESS_POT = registerBlock("fortress_pot", () -> new PotBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).strength(0.3f, 0.3f).noOcclusion().sound(SoundType.GLASS)), true);
+    public static final RegistryObject<Block> POT_OF_GREED = registerBlock("pot_of_greed", () -> new PotOfGreedBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).strength(0.3f, 0.3f).noOcclusion().sound(SoundType.GLASS)), true);
+    public static final RegistryObject<Block> GOLD_INGOT_PILE = registerBlock("gold_ingot_pile", () -> new PileBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).strength(3.0f, 6.0f).noOcclusion().sound(SoundType.METAL)), true);
+    public static final RegistryObject<Block> WITHER_VINE = registerBlock("wither_vine", () -> new WitherVineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().pushReaction(PushReaction.DESTROY).ignitedByLava().strength(0.2f).noOcclusion().sound(SoundType.VINE)), true);
+    public static final RegistryObject<Block> WITHER_LEAVES = registerBlock("wither_leaves", () -> new WitherLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).pushReaction(PushReaction.DESTROY).ignitedByLava().strength(0.2F).noOcclusion().sound(SoundType.GRASS)), true);
+    public static final RegistryObject<Block> NETHER_BRICK_PILE = registerBlock("nether_brick_pile", () -> new PileBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).strength(3.0f, 6.0f).noOcclusion().sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops()), true);
+    public static final RegistryObject<Block> FORTRESS_EXPLOSIVE_BARREL = registerBlock("fortress_explosive_barrel", () -> new ExplosiveBarrelBlock(BlockBehaviour.Properties.of().mapColor(MapColor.FIRE).ignitedByLava().instabreak().noOcclusion().sound(SoundType.GRASS)), true);
+    public static final RegistryObject<Block> FORTRESS_BOOK_PILE = registerBlock("fortress_book_pile", () -> new BookPileBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).instabreak().noOcclusion().sound(SoundType.WOOL)), true);
 
 
     /* Block Entities */
-    public static final RegistryObject<Block> LOCKED_CHEST = registerBlock("locked_chest", () -> new LockedChestBlock(Block.Properties.of(new Material.Builder(MaterialColor.WOOD).build()).strength(-1.0f, 3600000.0f).noOcclusion().sound(SoundType.WOOD)), false);
-    public static final RegistryObject<Block> DUNGEON_CHEST = registerBlock("dungeon_chest", () -> new DungeonChestBlock(Block.Properties.of(new Material.Builder(MaterialColor.WOOD).build()).strength(2.5f, 2.5f).noOcclusion().sound(SoundType.WOOD)), false);
-    public static final RegistryObject<Block> RESISTANCE_CANCELER = registerBlock("resistance_canceler", () -> new ResistanceCancelerBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(50.0f, 1200.0f).noOcclusion().lightLevel((lightlevel) -> {return 15;})), true);
+    public static final RegistryObject<Block> LOCKED_CHEST = registerBlock("locked_chest", () -> new LockedChestBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(-1.0f, 3600000.0f).noOcclusion().sound(SoundType.WOOD)), false);
+    public static final RegistryObject<Block> DUNGEON_CHEST = registerBlock("dungeon_chest", () -> new DungeonChestBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5f, 2.5f).noOcclusion().sound(SoundType.WOOD)), false);
+    public static final RegistryObject<Block> RESISTANCE_CANCELER = registerBlock("resistance_canceler", () -> new ResistanceCancelerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().strength(50.0f, 1200.0f).noOcclusion().lightLevel((lightlevel) -> {return 15;})), true);
 
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, boolean createItem) {

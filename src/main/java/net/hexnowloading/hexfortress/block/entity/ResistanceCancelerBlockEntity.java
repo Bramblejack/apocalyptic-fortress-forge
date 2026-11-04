@@ -66,7 +66,7 @@ public class ResistanceCancelerBlockEntity extends BlockEntity {
             for (Player player : list) {
                 if (player.hasEffect(MobEffects.FIRE_RESISTANCE)) {
                     player.removeEffect(MobEffects.FIRE_RESISTANCE);
-                    playSound(player.level, player.blockPosition(), SoundEvents.BEACON_POWER_SELECT);
+                    playSound(player.level(), player.blockPosition(), SoundEvents.BEACON_POWER_SELECT);
                 }
             }
             for (AbstractSkeleton skeleton : skeletonList) {

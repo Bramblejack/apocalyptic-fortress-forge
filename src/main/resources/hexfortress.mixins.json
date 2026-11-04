@@ -3,11 +3,13 @@
   "minVersion": "0.8.5",
   "package": "net.hexnowloading.hexfortress.mixin",
   "compatibilityLevel": "JAVA_17",
-  "client": [
+  "refmap": "hexfortress.refmap.json",
+  "mixins": [
     "TemplatePoolWeightMixin"
   ],
+  "client": [],
+  "server": [],
   "injectors": {
     "defaultRequire": 1
-  },
-  "refmap": "hexfortress.mixin-refmap.json"
+  }
 }

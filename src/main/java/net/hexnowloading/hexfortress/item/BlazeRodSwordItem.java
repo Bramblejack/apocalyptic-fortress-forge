@@ -39,7 +39,7 @@ public class BlazeRodSwordItem extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
         boolean result = super.hurtEnemy(itemStack, target, attacker);
-        if (result && !target.getLevel().isClientSide() && !target.fireImmune()) {
+        if (result && !target.level().isClientSide() && !target.fireImmune()) {
             target.setSecondsOnFire(12);
         }
         return result;

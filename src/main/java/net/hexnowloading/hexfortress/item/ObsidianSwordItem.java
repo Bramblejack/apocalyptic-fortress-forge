@@ -25,7 +25,7 @@ public class ObsidianSwordItem extends SwordItem {
     @Override
     public boolean hurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
         boolean result = super.hurtEnemy(itemStack, target, attacker);
-        Level level = attacker.getLevel();
+        Level level = attacker.level();
         RandomSource randomSource = level.getRandom();
         if (result && randomSource.nextFloat() * 2.0f < (float) (itemStack.getDamageValue()/2031.0f) && !attacker.hasEffect(MobEffects.DAMAGE_BOOST)) {
             attacker.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 60, 0));

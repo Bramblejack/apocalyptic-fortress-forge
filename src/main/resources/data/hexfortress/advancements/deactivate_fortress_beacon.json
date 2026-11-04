@@ -19,18 +19,20 @@
     "deactivate_fortress_beacon": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "item": {
-          "items": [
-            "hexfortress:blaze_key"
-          ]
-        },
-        "location": {
-          "block": {
-            "blocks": [
-              "hexfortress:resistance_canceler"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "hexfortress:blaze_key"
+              ]
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "hexfortress:resistance_canceler"
           }
-        }
+        ]
       }
     }
   },

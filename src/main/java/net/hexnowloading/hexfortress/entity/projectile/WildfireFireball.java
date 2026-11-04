@@ -31,7 +31,7 @@ public class WildfireFireball extends Fireball {
     @Override
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity target = hitResult.getEntity();
             Entity shooter = this.getOwner();
             int i = target.getRemainingFireTicks();
@@ -43,10 +43,10 @@ public class WildfireFireball extends Fireball {
             }
             if (flag) {
                 target.setSecondsOnFire(5);
-                if (!target.hurt(DamageSource.indirectMobAttack(this, (LivingEntity) shooter).setProjectile(), fireballDamage)) {
+                if (!target.hurt(this.level().damageSources().mobProjectile(this, (LivingEntity) shooter), fireballDamage)) {
                     target.setRemainingFireTicks(i);
                     if (target instanceof Player && ((Player) target).isBlocking()) {
-                        RandomSource randomSource = this.level.getRandom();
+                        RandomSource randomSource = this.level().getRandom();
                         if (randomSource.nextFloat() > 0.5) {
                             ((Player) target).disableShield(true);
                         }
@@ -61,12 +61,12 @@ public class WildfireFireball extends Fireball {
     @Override
     protected void onHitBlock(BlockHitResult hitResult) {
         super.onHitBlock(hitResult);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity shooter = this.getOwner();
-            if (!(shooter instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+            if (!(shooter instanceof Mob) || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
                 BlockPos blockpos = hitResult.getBlockPos().relative(hitResult.getDirection());
-                if (this.level.isEmptyBlock(blockpos)) {
-                    this.level.setBlockAndUpdate(blockpos, BaseFireBlock.getState(this.level, blockpos));
+                if (this.level().isEmptyBlock(blockpos)) {
+                    this.level().setBlockAndUpdate(blockpos, BaseFireBlock.getState(this.level(), blockpos));
                 }
             }
 
@@ -76,7 +76,7 @@ public class WildfireFireball extends Fireball {
     @Override
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             this.discard();
         }
 

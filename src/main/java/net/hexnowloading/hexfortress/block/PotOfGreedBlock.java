@@ -137,11 +137,11 @@ public class PotOfGreedBlock extends BaseEntityBlock {
 
     public void spawnReward(Level level, BlockState state, BlockPos pos) {
         if (state.getValue(HFProperties.STAGE) == 0) {
-            popResource(level, pos.offset(0.0D, 1.0D, 0.0D), new ItemStack(HFItems.FRAGMENT_OF_GREED.get(), 1));
+            popResource(level, pos.above(), new ItemStack(HFItems.FRAGMENT_OF_GREED.get(), 1));
         } else if (state.getValue(HFProperties.STAGE) == 1) {
-            popResource(level, pos.offset(0.0D, 1.0D, 0.0D), new ItemStack(HFItems.CREST_OF_GREED.get(), 1));
+            popResource(level, pos.above(), new ItemStack(HFItems.CREST_OF_GREED.get(), 1));
         } else {
-            popResource(level, pos.offset(0.0D, 1.0D, 0.0D), new ItemStack(HFItems.EMBLEM_OF_GREED.get(), 1));
+            popResource(level, pos.above(), new ItemStack(HFItems.EMBLEM_OF_GREED.get(), 1));
         }
     }
 

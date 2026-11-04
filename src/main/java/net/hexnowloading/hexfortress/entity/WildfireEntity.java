@@ -91,16 +91,16 @@ public class WildfireEntity extends Monster {
 
     @Override
     public void aiStep() {
-        if (!this.onGround && this.getDeltaMovement().y < 0.0D) {
+        if (!this.onGround() && this.getDeltaMovement().y < 0.0D) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(1.0D, 0.6D, 1.0D));
         }
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             if (this.random.nextInt(24) == 0 && !this.isSilent()) {
-                this.level.playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
+                this.level().playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.BLAZE_BURN, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
             }
 
             for(int i = 0; i < 2; ++i) {
-                this.level.addParticle(ParticleTypes.LARGE_SMOKE, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(ParticleTypes.LARGE_SMOKE, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
             }
         }
         super.aiStep();
@@ -154,7 +154,7 @@ public class WildfireEntity extends Monster {
 
     @Override
     public void tick() {
-        if (this.level.isClientSide()) {
+        if (this.level().isClientSide()) {
             if (isCharged()) {
                 this.attackRevertAnimationState.stop();
                 this.attackAnimationState.startIfStopped(this.tickCount);
@@ -246,16 +246,16 @@ public class WildfireEntity extends Monster {
                         if (this.attackStep > 1) {
                             double d4 = Math.sqrt(Math.sqrt(targetDistance)) * 0.5D;
                             if (!this.wildfire.isSilent()) {
-                                this.wildfire.level.levelEvent((Player)null, 1018, this.wildfire.blockPosition(), 0);
+                                this.wildfire.level().levelEvent((Player)null, 1018, this.wildfire.blockPosition(), 0);
                             }
 
                             for (int i = 0; i < FIREBALL_SHOT_AT_ONCE; ++i) {
-                                WildfireFireball wildfireFireball = new WildfireFireball(this.wildfire.level, this.wildfire, this.wildfire.getRandom().triangle(d1, 5.297D * d4), d2, this.wildfire.getRandom().triangle(d3, 5.297D * d4));
+                                WildfireFireball wildfireFireball = new WildfireFireball(this.wildfire.level(), this.wildfire, this.wildfire.getRandom().triangle(d1, 5.297D * d4), d2, this.wildfire.getRandom().triangle(d3, 5.297D * d4));
                                 wildfireFireball.setPos(wildfireFireball.getX(), this.wildfire.getY(0.5D) + 0.5D, wildfireFireball.getZ());
                                 wildfireFireball.setFireballDamage(10);
-                                //SmallFireball smallFireball = new SmallFireball(this.wildfire.level, this.wildfire, this.wildfire.getRandom().triangle(d1, 2.297D * d4), d2, this.wildfire.getRandom().triangle(d3, 2.297D * d4));
+                                //SmallFireball smallFireball = new SmallFireball(this.wildfire.level(), this.wildfire, this.wildfire.getRandom().triangle(d1, 2.297D * d4), d2, this.wildfire.getRandom().triangle(d3, 2.297D * d4));
                                 //smallFireball.setPos(smallFireball.getX(), this.wildfire.getY(0.5D) + 0.5D, smallFireball.getZ());
-                                this.wildfire.level.addFreshEntity(wildfireFireball);
+                                this.wildfire.level().addFreshEntity(wildfireFireball);
                             }
                         }
                     }

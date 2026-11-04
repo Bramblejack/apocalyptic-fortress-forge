@@ -42,12 +42,12 @@ public class TestEntity extends Monster {
     }
 
     private boolean isMovingOnLand() {
-        return this.onGround && this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D && !this.isInWaterOrBubble();
+        return this.onGround() && this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D && !this.isInWaterOrBubble();
     }
 
     @Override
     public void tick() {
-        if (this.level.isClientSide()) {
+        if (this.level().isClientSide()) {
             if (this.isMovingOnLand()) {
                 this.idleAnimationState.stop();
                 this.walkAnimationState.startIfStopped(this.tickCount);
