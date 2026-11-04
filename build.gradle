@@ -142,6 +142,8 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+
+    maven { url "https://www.cursemaven.com" }
 }
 
 dependencies {
@@ -155,7 +157,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // GeckoLib (required dependency): local jar libs/geckolib-forge-1.20.1-4.8.4.jar (group is ignored for flatDir)
-    implementation fg.deobf("blank:geckolib-forge-1.20.1:4.8.4")
+    implementation fg.deobf("curse.maven:geckolib-388172:7025129")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
